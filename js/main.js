@@ -10,9 +10,8 @@ input.addEventListener('input', mainFunction);
 
 function mainFunction() {
   let numbers = getPhoneNumbers(phoneMask);
-  getCRC32(numbers);
-
-
+  let hash = getCRC32(numbers);
+  getSum(numbers)
 }
 
 // Возвращает массив чисел без первого элемента (7)
@@ -54,3 +53,8 @@ function getCRC32(inputArray) {
   return inputArray.map(number => crc32(number));
 }
 
+// Возвращает сумму чисел массива
+function getSum(inputArray) {
+  let intNumbers = inputArray.map(number => parseInt(number));
+  return intNumbers.reduce((accumulator, currentValue) => accumulator + currentValue);
+}
