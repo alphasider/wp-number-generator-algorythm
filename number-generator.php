@@ -10,7 +10,8 @@
 	/* Scripts */
 	function load_scripts() {
 //		wp_enqueue_script( 'input-mask', plugins_url( 'js/input-mask.js', __FILE__ ), [], '1.0', true );
-		wp_enqueue_script( 'imask', plugins_url( 'js/imask.js', __FILE__ ), [], '1.0', true );
+		wp_enqueue_script( 'imask', plugins_url( 'vendor/imask.js', __FILE__ ), [], '1.0', true );
+		wp_enqueue_script( 'crc32', plugins_url( 'vendor/crc32.js', __FILE__ ), [], '1.0', true );
 		wp_enqueue_script( 'main-scripts', plugins_url( 'js/main.js', __FILE__ ), ['imask'], '1.0', true );
 	}
 

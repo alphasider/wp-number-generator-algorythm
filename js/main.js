@@ -9,15 +9,25 @@ let input = document.querySelector('#phone');
 input.addEventListener('input', mainFunction);
 
 function mainFunction() {
-  getPhoneNumbers(phoneMask);
+  let numbers = getPhoneNumbers(phoneMask);
+  getCRC32(numbers);
+
+
 }
 
+// Возвращает массив чисел без первого элемента (7)
+/**
+ *
+ * @param inputValue
+ * @returns {Array}
+ */
 
-// Возвращает массив
+/*
 function getPhoneNumbers(inputValue) {
   let unmaskedValue = inputValue.unmaskedValue;
   let arrayOfStrings = unmaskedValue.split('');
   let arrayOfInt = [];
+
 
   function res() {
     arrayOfStrings.forEach(number => {
@@ -27,6 +37,20 @@ function getPhoneNumbers(inputValue) {
   }
 
   res();
-  console.log(typeof arrayOfInt[0], arrayOfInt);
-  // console.log(Array.isArray(arrayOfStrings), ' - ', arrayOfStrings)
+
+  return arrayOfInt;
 }
+ */
+
+function getPhoneNumbers(inputValue) {
+  let unmaskedValue = inputValue.unmaskedValue;
+  let outputArray = unmaskedValue.split('');
+  outputArray.shift();
+  return outputArray
+}
+
+// Возвращает CRC32 (контрольную сумму) чисел массива
+function getCRC32(inputArray) {
+  return inputArray.map(number => crc32(number));
+}
+

@@ -15,4 +15,4 @@ var crc32 = function (r) {
   return (-1 ^ n) >>> 0
 };
 
-exports.crc32 = crc32;
+// exports.crc32 = crc32;
