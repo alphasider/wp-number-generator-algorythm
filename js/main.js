@@ -14,8 +14,16 @@ function mainFunction() {
   let sumOfNumber = getSum(intNumbers); // Сумма чисел массива
 
   let some = generateArrayOfElements(intNumbers);
+
+  let arrs = makeMultidimensionalArray(intNumbers, 20, 1);
+  let crc8Array = getCRC8(arrs);
+
+  console.info('intNumbers: ', intNumbers);
+  console.info('numbers: ', numbers);
+  console.info('arrs: ', arrs);
+  console.info('crc8Arr: ', crc8Array);
   // let hash = getCRC32(some); // Массив контрольных сумм
-  console.warn(some)
+  // console.warn(some)
 }
 
 // Возвращает массив чисел без первого элемента (7)
@@ -24,13 +32,6 @@ function getPhoneNumbers(inputValue) {
   let outputArray = unmaskedValue.split('');
   outputArray.shift();
   return outputArray
-}
-
-// Возвращает CRC32 (контрольную сумму) чисел массива
-// Принимает массив чисел типа string
-function getCRC32(inputArray) {
-  console.log(typeof inputArray[0], inputArray);
-  return inputArray.map(number => crc32(number));
 }
 
 // Возврает массив целых чисел
@@ -70,13 +71,22 @@ function generateArrayOfElements(inputArray) {
   return outputArray;
 }
 
+// Возвращает многомерный массив (массив с 20-ю вложенными массивами с одним элементом)
+function makeMultidimensionalArray(inputArray, arraysCount = 20, arrayLength = 1) {
+  return [...Array(arraysCount)]
+    .map((item, index) => {
+      return Array(arrayLength).fill(inputArray[index])
+    })
+}
 
+function getCRC8(inputArray) {
+  let crc8 = new CRC8();
 
-
-
-
-
-
-
-
+  // console.info(inputArray);
+  return inputArray
+    .map(number => {
+      // console.info(number);
+      return crc8.checksum(number);
+    });
+}
 
