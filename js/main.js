@@ -16,7 +16,8 @@ let input = document.querySelector('#phone');
  * @type {InputMask}
  */
 let phoneMask = IMask(input, {
-  mask: '+{7} (000) 000-00-00'
+  mask: '+{7} (000) 000-00-00',
+  lazy: false // Placeholder включен
 });
 /**
  * Перехват изменений в поле ввода
