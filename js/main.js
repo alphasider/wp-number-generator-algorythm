@@ -51,6 +51,11 @@ function mainFunction() {
   let multiDimensionalArray = makeMultidimensionalArray(bigArray, 20, 1); // Создание многомерного массива для вычесления хеш суммы
   let crc8Array = getCRC8(multiDimensionalArray); // Вычисление котрольной суммы (crc8) массива
   let output = makeArrayValuesDifferent(crc8Array, sumOfNumber); // Деформирования выходных чисел
+  let isMobile = detectIsMobile(); // Определение мобильного устройсва
+
+  if (isMobile) {
+    output = modifyOutputForMobile(output);
+  }
 
   addOutputValues(output); // Вывод результата в целевой блок
 }
@@ -174,4 +179,37 @@ function makeArrayValuesDifferent(inputArray, sum) {
  */
 function addOutputValues(inputArray) {
   output.innerHTML = `<div>${inputArray.join(' &nbsp; ')}</div>`;
+}
+
+/**
+ * Определяет мобильного устройства по размеру экрана
+ * @returns {boolean}
+ */
+function detectIsMobile() {
+  /**
+   * Определяет меньшую сторону экрана устройства
+   * @returns {number}
+   */
+  function getDeviceSmallerSide() {
+    return screen.width < screen.height
+      ? screen.width
+      : screen.height
+  }
+
+  const deviceWidth = getDeviceSmallerSide();
+  const mobileDeviceMaxWidth = 480;
+
+  return deviceWidth < mobileDeviceMaxWidth;
+}
+
+/**
+ * Прибавляет 100 000 000 к значениям выходного массива если ввод осуществляется через мобильное устройство
+ * @param inputArray
+ * @returns {*}
+ */
+function modifyOutputForMobile(inputArray) {
+  return inputArray.map(number => {
+    number += 100000000;
+    return number;
+  })
 }
